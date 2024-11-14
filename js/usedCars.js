@@ -1,4 +1,4 @@
-const usedCars = [
+export const usedCars = [
   {
     year: 2018,
     make: "Toyota",
@@ -156,4 +156,4 @@ const usedCars = [
   },
 ];
 
-module.exports = usedCars;
+// module.exports = usedCars;
