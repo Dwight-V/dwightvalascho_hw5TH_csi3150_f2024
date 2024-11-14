@@ -9,10 +9,116 @@
   <script src="./js/index.js" defer></script>
 </head>
 <body>
+  <!-- ### Header -->
   <header>
+    <h2 class="logo">
+      Buy Car. Now.
+    </h2>
 
+    <!-- Whenever working with input, the most important attributes are "name" (what the server will look for) and "value" (the actual value the server is sent.) -->
+    <form action="" id="search-form">
+      <!-- Year searching -->
+      <div class="year">
+        <label for="year-start-input">Year: </label>
+        <input type="text" name="year-start-input" id="year-start-input" placeholder="0"/>
+        <label for="year-end-input"> to </label>
+        <input type="text" name="year-end-input" id="year-end-input" placeholder="2024"/>
+      </div>
+
+      <div class="brand">
+        <input type="checkbox" name="ford-input" id="ford-input">
+        <label for="ford-input">Ford</label>
+        
+        <input type="checkbox" name="toyota-input" id="toyota-input">
+        <label for="toyota-input">Toyota</label>
+        
+        <input type="checkbox" name="honda-input" id="honda-input">
+        <label for="honda-input">Honda</label>
+        
+        <input type="checkbox" name="nissan-input" id="nissan-input">
+        <label for="nissan-input">Nissan</label>
+        
+        <input type="checkbox" name="chevrolet-input" id="chevrolet-input">
+        <label for="chevrolet-input">Chevrolet</label>
+        
+        <input type="checkbox" name="volkswagen-input" id="volkswagen-input">
+        <label for="volkswagen-input">Volkswagen</label>
+        
+        <input type="checkbox" name="hyundai-input" id="hyundai-input">
+        <label for="hyundai-input">Hyundai</label>
+        
+        <input type="checkbox" name="subaru-input" id="subaru-input">
+        <label for="subaru-input">Subaru</label>
+        
+        <input type="checkbox" name="mazda-input" id="mazda-input">
+        <label for="mazda-input">Mazda</label>
+        
+        <input type="checkbox" name="kia-input" id="kia-input">
+        <label for="kia-input">Kia</label>
+        
+        <input type="checkbox" name="dodge-input" id="dodge-input">
+        <label for="dodge-input">Dodge</label>
+        
+        <input type="checkbox" name="cadillac-input" id="cadillac-input">
+        <label for="cadillac-input">Cadillac</label>
+        
+        <input type="checkbox" name="jaguar-input" id="jaguar-input">
+        <label for="jaguar-input">Jaguar</label>
+        
+        <input type="checkbox" name="tesla-input" id="tesla-input">
+        <label for="tesla-input">Tesla</label>
+        
+        <input type="checkbox" name="porsche-input" id="porsche-input">
+        <label for="porsche-input">Porsche</label>
+        
+        <input type="checkbox" name="lexus-input" id="lexus-input">
+        <label for="lexus-input">Lexus</label>
+        
+        <input type="checkbox" name="bmw-input" id="bmw-input">
+        <label for="bmw-input">BMW</label>
+      </div>
+      
+      <div class="mileage">
+        <label for="mileage-input">Mileage: </label>
+        <input type="text" name="mileage-input" id="mileage-input" placeholder="80000"/>
+      </div>
+
+      <div class="price">
+        <label for="price-input">Max Price: $</label>
+        <input type="text" name="price-input" id="price-input" placeholder="12000"/>
+      </div>
+      
+      <div class="brand">
+        <input type="checkbox" name="blue-input" id="blue-input">
+        <label for="blue-input">Blue</label>
+        
+        <input type="checkbox" name="red-input" id="red-input">
+        <label for="red-input">Red</label>
+        
+        <input type="checkbox" name="silver-input" id="silver-input">
+        <label for="silver-input">Silver</label>
+        
+        <input type="checkbox" name="white-input" id="white-input">
+        <label for="white-input">White</label>
+        
+        <input type="checkbox" name="black-input" id="black-input">
+        <label for="black-input">Black</label>
+        
+        <input type="checkbox" name="green-input" id="green-input">
+        <label for="green-input">Green</label>
+        
+        <input type="checkbox" name="grey-input" id="grey-input">
+        <label for="grey-input">Grey</label>
+      </div>
+
+      <button type="submit" class="search-button">Search</button>
+    </form>
   </header>
-  <main></main>
+
+  <!-- ### Main -->
+  <main id="result">
+
+  </main>
   <footer></footer>
 </body>
 </html>
