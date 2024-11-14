@@ -16,18 +16,6 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
 
-let showDetails = (car, id) => {
-    // return createCard(car, true);
-    document.querySelector(`#${id}`).innerHTML = `
-        <h3>${car.year} ${car.make} ${car.model}</h1>
-        <p>$${numberWithCommas(car.price)}</p>
-        <p>Mileage: ${numberWithCommas(car.mileage)} miles</p>
-        <p>Color: ${car.color}</p>
-        <p>${car.gasMilage}</p>
-        <p><a href="#" onClick="createCard(${car}, ${id})">...less details</a></p>
-        `
-};
-
 // returns a string containing the html code for displaying a card. 
 let createCard = (car, id) => {
     return `
@@ -35,9 +23,24 @@ let createCard = (car, id) => {
             <h3>${car.year} ${car.make} ${car.model}</h1>
             <p>$${numberWithCommas(car.price)}</p>
             <p>${numberWithCommas(car.mileage)} miles</p>
-            <p><a href="#" onClick="function alerter(id) {alert(id)}; alerter('${id}')">more details...</a></p>
+            <div id="more-${id}" style="display:none">
+                <p>Color: ${car.color}</p>
+                <p>${car.gasMileage}</p>
+            </div>
+            <p><button id="more-text-${id}" onClick='function more() {
+                    info = document.querySelector("#more-${id}");
+                    text = document.querySelector("#more-text-${id}");
+                    if (info.style.display === "block") {
+                        info.style.display = "none";
+                        text.innerHTML = "more details...";
+                    } else {
+                        info.style.display = "block";
+                        text.innerHTML = "...less details";
+                    }
+                }; more()'>more details...</button></p>
         </div>
     `
+    // onClick idea from https://www.w3schools.com/howto/howto_js_read_more.asp
 }
 
 // Displays cards.
