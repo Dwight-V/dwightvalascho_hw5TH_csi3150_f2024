@@ -22,3 +22,7 @@ body {
     padding: 0.1rem 1rem;
     width: 20%;
 }
+
+.no-results {
+    margin: 10px;
+}
