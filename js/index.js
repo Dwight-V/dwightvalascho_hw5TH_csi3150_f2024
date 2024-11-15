@@ -11,6 +11,7 @@ import { usedCars } from './usedCars.js';
 
 // The div that holds the car cards
 let result = document.querySelector("#result");
+
 let arrMake = document.querySelectorAll(".car-make");
 let arrColor = document.querySelectorAll(".car-color");
 
@@ -104,6 +105,14 @@ let displayCards = (arrCar, colPerRow = 4) => {
 let displayAllCards = () => {
     displayCards(usedCars);
 }
+
+
+
+
+document.querySelector(".logo").addEventListener("click", (e) => {
+    displayAllCards();
+});
+
 
 
 document.querySelector("#btn-search").addEventListener("click", (e) => {
