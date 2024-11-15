@@ -1,5 +1,17 @@
+* {
+    --primary-color: #4d4d4d;
+    --secondary-color: #cccccc;
+    --terciary-color: #e0e0e0;
+    --text-color: #000000;
+
+    margin: 0;
+    padding: 0;
+    color: var(--text-color);
+
+}
+
 body {
-    background-color: #d7d7d7;
+    background-color: var(--terciary-color);
 }
 
 #result {
@@ -16,8 +28,8 @@ body {
 }
 
 .card {
-    background-color: #f0d5d5;
-    border: #eb6969 solid 5px;
+    background-color: var(--secondary-color);
+    border: var(--primary-color) solid 5px;
     border-radius: 10px;
     padding: 0.1rem 1rem;
     width: 20%;
@@ -25,4 +37,14 @@ body {
 
 .no-results {
     margin: 10px;
+}
+
+.logo {
+    transition: color 0.3s ease;
+}
+
+.logo:hover {
+    color: var(--primary-color);
+    cursor: pointer;
+    text-decoration: underline;
 }
