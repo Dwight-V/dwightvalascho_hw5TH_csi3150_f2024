@@ -96,6 +96,26 @@ let filterMileage = () => {
 
     return arrReturn;
 }
+
+let filterPrice = () => {
+    let arrReturn = [];
+    let priceInput = document.querySelector("#price-input");
+
+
+    // The input is empty, so return nothing.
+    if (!priceInput.value) {
+        return;
+    }
+
+    // Checks if each car costs <= to the value specified by the user
+    for (let i = 0; i < usedCars.length; i++) {
+        if (usedCars[i].price <= priceInput.value) {
+            arrReturn.push(usedCars[i]);
+        }
+    }
+
+    return arrReturn;
+}
 // #endregion
 
 
@@ -172,6 +192,7 @@ document.querySelector("#btn-search").addEventListener("click", (e) => {
     arrDisplay = arrDisplay.concat(filterYear());
     arrDisplay = arrDisplay.concat(filterMake());
     arrDisplay = arrDisplay.concat(filterMileage());
+    arrDisplay = arrDisplay.concat(filterPrice());
 
     // Removes undefined values from array. From https://stackoverflow.com/a/28607462
     arrDisplay = arrDisplay.filter( Boolean );
