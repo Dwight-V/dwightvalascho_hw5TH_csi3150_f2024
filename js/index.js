@@ -20,10 +20,67 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
 
-let capitalize = (str) => {
-    return str[0].toUpperCase() + str.slice(1);
+
+
+// #region filter stuff
+let filterYear = () => {
+    let yearStartInput = document.querySelector("#year-start-input");
+    let yearEndInput = document.querySelector("#year-end-input");
+
+    if (!yearEndInput.value) {
+        console.log("No year selected.");
+        return;
+    }
+
+    
+    let arrReturn = [];
+    let yearStart = yearStartInput.value || 0;
+    let yearEnd = yearEndInput.value;
+    
+
+    // .includes() from https://stackoverflow.com/a/6116511
+    for (let i = 0; i < usedCars.length; i++) {
+        // console.log(`${usedCars[i].make} in ${arrCheckedBoxes}:    ${arrCheckedBoxes.includes(usedCars[i].make)}`);
+        const carYear = usedCars[i].year;
+        if (carYear >= yearStart && carYear <= yearEnd) {
+            arrReturn.push(usedCars[i]);
+        }
+    }
+
+    // console.log("filter year:" + arrReturn);
+    return arrReturn;
 }
 
+let filterMake = () => {
+    let arrReturn = [];
+    let arrCheckedBoxes = [];
+
+    for (let i = 0; i < arrMake.length; i++) {
+        if (arrMake[i].checked) {
+            arrCheckedBoxes.push(arrMake[i].value);
+        }
+    }
+
+    if (arrCheckedBoxes.length <= 0) {
+        console.log("No checkboxes selected.");
+        return;
+    }
+
+    // .includes() from https://stackoverflow.com/a/6116511
+    for (let i = 0; i < usedCars.length; i++) {
+        // console.log(`${usedCars[i].make} in ${arrCheckedBoxes}:    ${arrCheckedBoxes.includes(usedCars[i].make)}`);
+        if (arrCheckedBoxes.includes(usedCars[i].make)) {
+            arrReturn.push(usedCars[i]);
+        }
+    }
+
+    // console.log(`filter make: ${arrReturn}`);
+    return arrReturn;
+}
+// #endregion
+
+
+// #region card stuff
 // returns a string containing the html code for displaying a card. 
 let createCard = (car, id) => {
     // console.log(`createCard() ${car.year}`);
@@ -52,33 +109,6 @@ let createCard = (car, id) => {
     // onClick idea from https://www.w3schools.com/howto/howto_js_read_more.asp
 }
 
-let filterCards = () => {
-    let arrReturn = [];
-    let arrCheckedBoxes = [];
-
-    for (let i = 0; i < arrMake.length; i++) {
-        if (arrMake[i].checked) {
-            arrCheckedBoxes.push(arrMake[i].value);
-        }
-    }
-
-    if (arrCheckedBoxes.length <= 0) {
-        console.log("No checkboxes selected.");
-        return;
-    }
-
-    // .inclueds() from https://stackoverflow.com/a/6116511
-    for (let i = 0; i < usedCars.length; i++) {
-        // console.log(`${usedCars[i].make} in ${arrCheckedBoxes}:    ${arrCheckedBoxes.includes(usedCars[i].make)}`);
-        if (arrCheckedBoxes.includes(usedCars[i].make)) {
-            arrReturn.push(usedCars[i]);
-        }
-    }
-
-    // console.log(arrReturn);
-    return arrReturn;
-}
-
 // Displays cards.
 let displayCards = (arrCar, colPerRow = 4) => {
     if (!arrCar || arrCar.length <= 0) {
@@ -105,7 +135,7 @@ let displayCards = (arrCar, colPerRow = 4) => {
 let displayAllCards = () => {
     displayCards(usedCars);
 }
-
+// #endregion
 
 
 
@@ -118,8 +148,18 @@ document.querySelector(".logo").addEventListener("click", (e) => {
 document.querySelector("#btn-search").addEventListener("click", (e) => {
     // prevents page reload on submit
     e.preventDefault();
-    // filterCards();
-    displayCards(filterCards());
+    // filterMake();
+    let arrDisplay = [];
+    arrDisplay = arrDisplay.concat(filterYear());
+    arrDisplay = arrDisplay.concat(filterMake());
+
+    // Removes undefined values from array. From https://stackoverflow.com/a/28607462
+    arrDisplay = arrDisplay.filter( Boolean );
+
+    // Removes duplicates from array. From https://stackoverflow.com/a/9229821
+    arrDisplay = [...new Set(arrDisplay)];
+
+    displayCards(arrDisplay);
 });
 
 
