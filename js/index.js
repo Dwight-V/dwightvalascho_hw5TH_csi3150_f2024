@@ -9,10 +9,6 @@ import { usedCars } from './usedCars.js';
 // usedCars[0].price
 // usedCars[0].year
 
-// The div that holds the car cards
-let result = document.querySelector("#result");
-
-let arrMake = document.querySelectorAll(".car-make");
 
 // From https://stackoverflow.com/a/2901298
 function numberWithCommas(x) {
@@ -52,6 +48,7 @@ let filterYear = () => {
 let filterMake = () => {
     let arrReturn = [];
     let arrCheckedBoxes = [];
+    let arrMake = document.querySelectorAll(".car-make");
 
     for (let i = 0; i < arrMake.length; i++) {
         if (arrMake[i].checked) {
@@ -118,8 +115,8 @@ let filterPrice = () => {
 
 let filterColor = () => {
     let arrReturn = [];
-    let arrColor = document.querySelectorAll(".car-color");
     let arrCheckedBoxes = [];
+    let arrColor = document.querySelectorAll(".car-color");
 
     for (let i = 0; i < arrColor.length; i++) {
         if (arrColor[i].checked) {
@@ -179,6 +176,9 @@ let createCard = (car, id) => {
 
 // Displays cards.
 let displayCards = (arrCar, colPerRow = 4) => {
+    // The div that holds the car cards
+    let result = document.querySelector("#result");
+    
     if (!arrCar || arrCar.length <= 0) {
         // console.log("in empty displayCards()");
         result.innerHTML = `<p class="no-results">No search results.</p>`
