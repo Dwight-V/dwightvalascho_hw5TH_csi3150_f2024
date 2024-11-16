@@ -36,10 +36,12 @@ body {
 }
 
 .no-results {
-    margin: 10px;
+    width: 100%;
+    text-align: center;
 }
 
 .logo {
+    margin-bottom: 10px;
     transition: color 0.3s ease;
 }
 
@@ -51,4 +53,22 @@ body {
 
 main {
     margin-top: 10px;
+}
+
+button {
+    margin-top: 5px;
+    padding: 2px 5px;
+}
+
+#search-form {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-evenly;
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+header {
+    padding: 5px 10px;
 }
