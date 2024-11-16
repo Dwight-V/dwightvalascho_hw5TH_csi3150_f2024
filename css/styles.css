@@ -48,3 +48,7 @@ body {
     cursor: pointer;
     text-decoration: underline;
 }
+
+main {
+    margin-top: 10px;
+}

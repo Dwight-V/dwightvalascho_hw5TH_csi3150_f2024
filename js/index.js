@@ -27,20 +27,19 @@ let filterYear = () => {
     let yearStartInput = document.querySelector("#year-start-input");
     let yearEndInput = document.querySelector("#year-end-input");
 
-    if (!yearEndInput.value) {
+    if (!yearEndInput.value && !yearStartInput.value) {
         console.log("No year selected.");
         return;
     }
 
     
     let arrReturn = [];
+    // Could use year*Input.placeholder for the alternate value, but may change what the placeholder says.
     let yearStart = yearStartInput.value || 0;
-    let yearEnd = yearEndInput.value;
+    let yearEnd = yearEndInput.value || 2024;
     
-
-    // .includes() from https://stackoverflow.com/a/6116511
+    // Checks for cars with years within the range (inclusive on both ends).
     for (let i = 0; i < usedCars.length; i++) {
-        // console.log(`${usedCars[i].make} in ${arrCheckedBoxes}:    ${arrCheckedBoxes.includes(usedCars[i].make)}`);
         const carYear = usedCars[i].year;
         if (carYear >= yearStart && carYear <= yearEnd) {
             arrReturn.push(usedCars[i]);
@@ -138,7 +137,7 @@ let displayAllCards = () => {
 // #endregion
 
 
-
+// #region click events
 document.querySelector(".logo").addEventListener("click", (e) => {
     displayAllCards();
 });
@@ -161,7 +160,7 @@ document.querySelector("#btn-search").addEventListener("click", (e) => {
 
     displayCards(arrDisplay);
 });
-
+// #endregion
 
 
 
