@@ -13,7 +13,6 @@ import { usedCars } from './usedCars.js';
 let result = document.querySelector("#result");
 
 let arrMake = document.querySelectorAll(".car-make");
-let arrColor = document.querySelectorAll(".car-color");
 
 // From https://stackoverflow.com/a/2901298
 function numberWithCommas(x) {
@@ -116,6 +115,36 @@ let filterPrice = () => {
 
     return arrReturn;
 }
+
+let filterColor = () => {
+    let arrReturn = [];
+    let arrColor = document.querySelectorAll(".car-color");
+    let arrCheckedBoxes = [];
+
+    for (let i = 0; i < arrColor.length; i++) {
+        if (arrColor[i].checked) {
+            arrCheckedBoxes.push(arrColor[i].value);
+        }
+    }
+
+    if (arrCheckedBoxes.length <= 0) {
+        console.log("No color checkboxes selected.");
+        return;
+    }
+
+    // .includes() from https://stackoverflow.com/a/6116511
+    for (let i = 0; i < usedCars.length; i++) {
+        // console.log(`${usedCars[i].color}`);
+        if (arrCheckedBoxes.includes(usedCars[i].color.toLowerCase())) {
+            arrReturn.push(usedCars[i]);
+        }
+    }
+
+    console.log(`filter color:`);
+    console.log(arrCheckedBoxes);
+    console.log(arrReturn);
+    return arrReturn;
+}
 // #endregion
 
 
@@ -193,6 +222,7 @@ document.querySelector("#btn-search").addEventListener("click", (e) => {
     arrDisplay = arrDisplay.concat(filterMake());
     arrDisplay = arrDisplay.concat(filterMileage());
     arrDisplay = arrDisplay.concat(filterPrice());
+    arrDisplay = arrDisplay.concat(filterColor());
 
     // Removes undefined values from array. From https://stackoverflow.com/a/28607462
     arrDisplay = arrDisplay.filter( Boolean );
