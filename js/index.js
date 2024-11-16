@@ -208,10 +208,9 @@ let displayAllCards = () => {
 
 // #region click events
 document.querySelector(".logo").addEventListener("click", (e) => {
-    displayAllCards();
+    // displayAllCards();
+    document.querySelector("#btn-clear").click();
 });
-
-
 
 document.querySelector("#btn-search").addEventListener("click", (e) => {
     // prevents page reload on submit
