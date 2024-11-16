@@ -1,21 +1,10 @@
 // const usedCar = require("./usedCars");
 import { usedCars } from './usedCars.js';
 
-// usedCars[0].color
-// usedCars[0].gasMileage
-// usedCars[0].make
-// usedCars[0].mileage
-// usedCars[0].model
-// usedCars[0].price
-// usedCars[0].year
-
-
 // From https://stackoverflow.com/a/2901298
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?<!\.\d*)(?=(\d{3})+(?!\d))/g, ",");
 }
-
-
 
 // #region filter stuff
 let filterYear = () => {
@@ -110,6 +99,8 @@ let filterPrice = () => {
         }
     }
 
+    // console.log("filterPrice():");
+    // console.log(arrReturn);
     return arrReturn;
 }
 
@@ -137,9 +128,9 @@ let filterColor = () => {
         }
     }
 
-    console.log(`filter color:`);
-    console.log(arrCheckedBoxes);
-    console.log(arrReturn);
+    // console.log(`filter color:`);
+    // console.log(arrCheckedBoxes);
+    // console.log(arrReturn);
     return arrReturn;
 }
 // #endregion
@@ -178,7 +169,7 @@ let createCard = (car, id) => {
 let displayCards = (arrCar, colPerRow = 4) => {
     // The div that holds the car cards
     let result = document.querySelector("#result");
-    
+
     if (!arrCar || arrCar.length <= 0) {
         // console.log("in empty displayCards()");
         result.innerHTML = `<p class="no-results">No search results.</p>`
@@ -209,6 +200,7 @@ let displayAllCards = () => {
 // #region click events
 document.querySelector(".logo").addEventListener("click", (e) => {
     // displayAllCards();
+    // From https://stackoverflow.com/a/24278561
     document.querySelector("#btn-clear").click();
 });
 
@@ -217,14 +209,55 @@ document.querySelector("#btn-search").addEventListener("click", (e) => {
     e.preventDefault();
     // filterMake();
     let arrDisplay = [];
-    arrDisplay = arrDisplay.concat(filterYear());
-    arrDisplay = arrDisplay.concat(filterMake());
-    arrDisplay = arrDisplay.concat(filterMileage());
-    arrDisplay = arrDisplay.concat(filterPrice());
-    arrDisplay = arrDisplay.concat(filterColor());
+    let arrDisplayIsEmpty = true;
+
+    let addToArrDisplay = (arr) => {
+        // Case 1: arr is empty.
+        if (!arr) {
+            // console.log("Arr is empty!");
+            return;
+        }
+        // Case 2: arrDisplay is empty, so arr will be the first input added.
+        /* 
+        Tried using arrDisplay.length <= 0 instead of a flag, but using
+        length can't tell between when arr = undefined because of no search
+        results or because nothing was input. 
+
+        This distinction is important for cases such as price = $1. No search results are 
+        shown, but is still a filter. Programmatically, the difference is whether each function
+        hits their "return;" or "return arrResult;" (that's empty).
+        */
+        else if (arrDisplayIsEmpty) {
+            // console.log("Arr is first added!");
+            // console.log(arr);
+
+            arrDisplay = arr;
+            arrDisplayIsEmpty = false;
+        } 
+        // Case 3: arrDisplay is already populated.
+        else {
+            // console.log("Arr is added!");
+            // console.log(arr);
+
+            // Finds the intersection of the two arrays. From https://stackoverflow.com/a/33034768
+            arrDisplay = arrDisplay.filter(x => arr.includes(x));
+        }
+    }
+
+    console.log("year");
+    addToArrDisplay(filterYear());
+    console.log("make");
+    addToArrDisplay(filterMake());
+    console.log("mileage");
+    addToArrDisplay(filterMileage());
+    console.log("price");
+    addToArrDisplay(filterPrice());
+    console.log("color");
+    addToArrDisplay(filterColor());
 
     // Removes undefined values from array. From https://stackoverflow.com/a/28607462
-    arrDisplay = arrDisplay.filter( Boolean );
+    // Unnecessary now, as taking the intersection above removes duplicates.
+    // arrDisplay = arrDisplay.filter( Boolean );
 
     // Removes duplicates from array. From https://stackoverflow.com/a/9229821
     arrDisplay = [...new Set(arrDisplay)];
