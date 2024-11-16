@@ -76,6 +76,26 @@ let filterMake = () => {
     // console.log(`filter make: ${arrReturn}`);
     return arrReturn;
 }
+
+let filterMileage = () => {
+    let arrReturn = [];
+
+    let mileageInput = document.querySelector("#mileage-input");
+
+    // The mileage input is empty, so return nothing.
+    if (!mileageInput.value) {
+        return;
+    }
+
+    // Checks if each car has <= the mileage specified by the user
+    for (let i = 0; i < usedCars.length; i++) {
+        if (usedCars[i].mileage <= mileageInput.value) {
+            arrReturn.push(usedCars[i]);
+        }
+    }
+
+    return arrReturn;
+}
 // #endregion
 
 
@@ -151,6 +171,7 @@ document.querySelector("#btn-search").addEventListener("click", (e) => {
     let arrDisplay = [];
     arrDisplay = arrDisplay.concat(filterYear());
     arrDisplay = arrDisplay.concat(filterMake());
+    arrDisplay = arrDisplay.concat(filterMileage());
 
     // Removes undefined values from array. From https://stackoverflow.com/a/28607462
     arrDisplay = arrDisplay.filter( Boolean );
